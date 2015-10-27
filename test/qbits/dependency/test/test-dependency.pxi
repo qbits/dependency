@@ -1,6 +1,7 @@
 (ns qbits.dependency.test.test-dependency
   (:require
    [qbits.dependency :refer :all]
+   [qbits.dependency.utils :refer [sort]]
    [pixie.test :as t]))
 
 ;; building a graph like:
@@ -266,45 +267,41 @@
   (t/assert (false? (before? [:a :b :c :d] :c :a))))
 
 
-;; (t/deftest t-topo-comparator-1
-;;   (let [sorted (sort (topo-comparator g1) [:d :a :b :foo])]
-;;     (are [x y] (before? sorted x y)
-;;       :a :b
-;;       :a :d
-;;       :a :foo
-;;       :b :d
-;;       :b :foo
-;;       :d :foo)))
+(t/deftest t-topo-comparator-1
+  (let [sorted (sort (topo-comparator g1) [:d :a :b :foo])]
+    (t/assert (before? sorted :a :b))
+    (t/assert (before? sorted :a :d))
+    (t/assert (before? sorted :a :foo))
+    (t/assert (before? sorted :b :foo))
+    (t/assert (before? sorted :d :foo))))
 
-;; (t/deftest t-topo-comparator-2
-;;   (let [sorted (sort (topo-comparator g2) '[three seven nine eight five])]
-;;     (are [x y] (before? sorted x y)
-;;       'three 'seven
-;;       'three 'eight
-;;       'three 'nine
-;;       'five  'eight
-;;       'five  'nine
-;;       'seven 'eight
-;;       'seven 'nine)))
+(t/deftest t-topo-comparator-2
+  (let [sorted (sort (topo-comparator g2) '[three seven nine eight five])]
+    (t/assert (before? sorted 'three 'seven))
+    (t/assert (before? sorted 'three 'eight))
+    (t/assert (before? sorted 'three 'nine))
+    (t/assert (before? sorted 'five  'eight))
+    (t/assert (before? sorted 'five  'nine))
+    (t/assert (before? sorted 'seven 'eight))
+    (t/assert (before? sorted 'seven 'nine))))
 
-;; (t/deftest t-topo-sort
-;;   (let [sorted (topo-sort g2)]
-;;     (are [x y] (before? sorted x y)
-;;       'one   'two
-;;       'one   'three
-;;       'one   'four
-;;       'one   'six
-;;       'one   'seven
-;;       'two   'three
-;;       'two   'four
-;;       'two   'six
-;;       'two   'seven
-;;       'three 'six
-;;       'three 'seven
-;;       'four  'seven
-;;       'five  'four
-;;       'five  'seven
-;;       'six   'seven)))
+(t/deftest t-topo-sort
+  (let [sorted (topo-sort g2)]
+    (t/assert (before? sorted 'one   'two))
+    (t/assert (before? sorted 'one   'three))
+    (t/assert (before? sorted 'one   'four))
+    (t/assert (before? sorted 'one   'six))
+    (t/assert (before? sorted 'one   'seven))
+    (t/assert (before? sorted 'two   'three))
+    (t/assert (before? sorted 'two   'four))
+    (t/assert (before? sorted 'two   'six))
+    (t/assert (before? sorted 'two   'seven))
+    (t/assert (before? sorted 'three 'six))
+    (t/assert (before? sorted 'three 'seven))
+    (t/assert (before? sorted 'four  'seven))
+    (t/assert (before? sorted 'five  'four))
+    (t/assert (before? sorted 'five  'seven))
+    (t/assert (before? sorted 'six   'seven))))
 
 (t/deftest t-no-cycles
   (t/assert-throws?
