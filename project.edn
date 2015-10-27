@@ -2,5 +2,7 @@
  :version "0.1.0-alpha"
  :description "A data structure for representing dependency graphs in Pixie"
  :source-paths ["src"]
+ :license {:name "Eclipse Public License"
+           :url "http://www.eclipse.org/legal/epl-v10.html"}
  ;; :test-paths ["test"]
  }
