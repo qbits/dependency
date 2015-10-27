@@ -1,5 +1,5 @@
 {:name cc.qbits/dependency
- :version "0.1.0-alpha"
+ :version "0.1.1-alpha"
  :description "A data structure for representing dependency graphs in Pixie"
  :source-paths ["src"]
  :license {:name "Eclipse Public License"
