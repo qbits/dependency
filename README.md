@@ -12,6 +12,15 @@ immutable and persistent.
 Nodes in the graph may be any type which supports Pixies's equality
 semantics such as keywords, symbols, or strings.
 
+## Installation
+
+With [dust](https://github.com/pixie-lang/dust), add the following to
+your project.edn `:dependencies`:
+
+```clojure
+[mpenet/dependency "0.1.1-alpha"]
+```
+
 ## Usage
 
     (require '[qbits.dependency :as dep])
