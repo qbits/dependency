@@ -18,7 +18,7 @@ With [dust](https://github.com/pixie-lang/dust), add the following to
 your project.edn `:dependencies`:
 
 ```clojure
-[mpenet/dependency "0.1.1-alpha"]
+[qbits/dependency "0.1.1-alpha"]
 ```
 
 ## Usage
