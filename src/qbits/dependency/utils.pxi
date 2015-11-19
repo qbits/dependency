@@ -3,6 +3,12 @@
 ;; Taken from https://github.com/pixie-lang/pixie/pull/361/commits
 ;; until we get something else
 
+(defn trampoline [f]
+  (let [result (f)]
+    (if (fn? result)
+      (recur result)
+      result)))
+
 (defn -merge-sort-step
   [comp-fn merged-left merged-right res]
   (cond
@@ -18,8 +24,8 @@
   (if (> (count coll) 1)
     (let [[left right] (split-at (/ (count coll) 2) coll)]
       (-merge-sort-step comp-fn
-                        (-merge-sort-split comp-fn left)
-                        (-merge-sort-split comp-fn right)
+                        (trampoline #(-merge-sort-split comp-fn left))
+                        (trampoline #(-merge-sort-split comp-fn right))
                         []))
     coll))
 
